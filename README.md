@@ -16,11 +16,17 @@ It is recommended to install this on a fresh debian-install on the Raspberry Pi 
 
 To install, just SSH into your Pi and run these commands:
 
+First, make sure your system is up to date and you have git installed
+
+```bash
+sudo apt update && sudo apt install git
+```
+
+Then run this, it clones the remote repo onto your machine.
+
 ```bash
 git clone https://github.com/Jonathan357611/Launch-Tracker.git
 ```
-
-This clones the remote repo onto your machine.
 
 To simplify things, I created a simple installer, this will automatically add the required cronjobs to run the script every few minutes after boot for you.
 It just asks you how often you want to let it run (default=10minutes).

@@ -25,5 +25,4 @@ echo "https://github.com/Jonathan357611/Launch-Tracker/"
 echo "Thanks for using my program :)"
 
 read -p "In order to run, your raspberry pi has to reboot. Press enter to reboot." input
-sudo su -
 sudo reboot now
