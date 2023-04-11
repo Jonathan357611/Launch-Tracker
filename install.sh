@@ -15,8 +15,8 @@ done
 schedule="*/$input * * * *"
 crontab -r
 command="/usr/bin/python3 $script_dir/main.py"
-echo "$(crontab -l)" | { cat; echo "$schedule $command"; } | crontab -
 echo "$(crontab -l)" | { cat; echo "@reboot $command"; } | crontab -
+echo "$(crontab -l)" | { cat; echo "$schedule $command"; } | crontab -
 
 echo "Crontab added!"
 echo
@@ -24,4 +24,6 @@ echo "All done! If you have any suggestions or find any bugs, report them on git
 echo "https://github.com/Jonathan357611/Launch-Tracker/"
 echo "Thanks for using my program :)"
 
-echo $(command)
+read -p "In order to run, your raspberry pi has to reboot. Press enter to reboot." input
+sudo su -
+sudo reboot now

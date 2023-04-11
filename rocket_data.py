@@ -56,3 +56,12 @@ class Launches:
             "launch_percent": percentage,
         }
         return parsed_data
+
+
+def wait_for_internet():
+    while True:
+        try:
+            requests.head("http://github.com/", timeout=15)
+            return
+        except requests.ConnectionError:
+            pass

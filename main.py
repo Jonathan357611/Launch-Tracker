@@ -9,6 +9,8 @@ os.chdir(dname)
 
 import rocket_data  # Now import the custom module
 
+rocket_data.wait_for_internet()  # Wait for working internet connection
+
 # Initialize display (Important: Enable SPI via raspi-config!)
 display = epd.EPD()
 display.init()
@@ -105,3 +107,4 @@ display.Clear()
 display.display(
     display.getbuffer(image=black_image), display.getbuffer(image=color_image)
 )
+
