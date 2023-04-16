@@ -31,14 +31,32 @@ class Launches:
 
         return countdown_seconds
 
+    def truncate_string(self, string, overflow, new_end="..."):
+        if len(string) >= overflow:
+            return string[:overflow] + "..."
+        return string
+
     def parse_data(
         self, index
     ):  # Parse only required data and calculate percentages etc.
-        launch = self.data["results"][index]
+        current_time = datetime.utcnow().timestamp()
+
+        skip = 0
+        for i in range(
+            len(self.data["results"])
+        ):  # Get next upcoming launch, by checking launch dates
+            iter_launch_date = self.timestamp_to_seconds(self.data["results"][i]["net"])
+
+            if current_time > iter_launch_date:
+                skip += 1
+            else:
+                continue
+
+        launch = self.data["results"][skip + index]
 
         previous_launch_date = self.timestamp_to_seconds(self.get_latest_rocket_date())
         next_launch_date = self.timestamp_to_seconds(launch["net"])
-        current_time = datetime.utcnow().timestamp()
+
         percentage = round(
             (current_time - previous_launch_date)
             / (next_launch_date - previous_launch_date),
@@ -50,7 +68,9 @@ class Launches:
             "countdown": launch["net"],
             "mission_name": launch["mission"]["name"],
             "abbrev": launch["status"]["abbrev"],
-            "agency": launch["launch_service_provider"]["name"],
+            "agency": self.truncate_string(
+                launch["launch_service_provider"]["name"], 15
+            ),
             "launch_location": launch["pad"]["name"],
             "countdown": round(self.get_countdown(launch["net"])),
             "launch_percent": percentage,
@@ -58,10 +78,16 @@ class Launches:
         return parsed_data
 
 
+def check_internet_connection():
+    try:
+        output = subprocess.check_output("ping -W 3 -c 1 8.8.8.8", shell=True)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
 def wait_for_internet():
-    while True:
-        try:
-            requests.head("http://github.com/", timeout=15)
-            return
-        except requests.ConnectionError:
-            pass
+    connected = False
+    while not connected:
+        connected = check_internet_connection()
+    return
