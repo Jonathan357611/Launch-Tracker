@@ -36,5 +36,7 @@ cd Launch-Tracker
 ./install.sh
 ```
 
+In order to work, you will need to reboot.
+
 That's really it. The program should now periodically start :)
 If you encounter any issues or have any ideas, just report them here!

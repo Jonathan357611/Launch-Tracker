@@ -1,5 +1,8 @@
 import requests
 from datetime import datetime
+import subprocess
+import json
+from discord_test import *
 
 
 class Launches:
@@ -11,9 +14,15 @@ class Launches:
     def get_latest_rocket_date(
         self,
     ):  # Get launch date of previous rocket, needed for progress bar
-        latest = requests.get(
-            "https://ll.thespacedevs.com/2.2.0/launch/previous/"
-        ).json()["results"][0]["net"]
+        try:
+            latest = requests.get(
+                "https://ll.thespacedevs.com/2.2.0/launch/previous/"
+            ).json()["results"][0]["net"]
+            with open(".latest.txt", "w") as f:
+                f.write(latest)
+        except Exception:
+            with open(".latest.txt", "r") as f:
+                latest = f.read()
         return latest
 
     def timestamp_to_seconds(
