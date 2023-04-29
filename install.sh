@@ -14,7 +14,7 @@ done
 
 schedule="*/$input * * * *"
 crontab -r
-command="/usr/bin/python3 $script_dir/main.py >> /home/jonat/log.txt"
+command="/usr/bin/python3 $script_dir/main.py"
 echo "$(crontab -l)" | { cat; echo "@reboot $command"; } | crontab -
 echo "$(crontab -l)" | { cat; echo "$schedule $command"; } | crontab -
 
