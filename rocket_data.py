@@ -2,7 +2,6 @@ import requests
 from datetime import datetime
 import subprocess
 import json
-from discord_test import *
 
 
 class Launches:
