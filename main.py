@@ -131,5 +131,6 @@ try:
         display.getbuffer(image=black_image), display.getbuffer(image=color_image)
     )
 
-except Exception:
+except Exception as e:
+    print(e)
     quit()
