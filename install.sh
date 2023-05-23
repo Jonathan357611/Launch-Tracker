@@ -36,6 +36,9 @@ while true; do
     esac
 done
 
+echo 'dtparam=spi=on' | sudo tee -a /boot/config.txt
+echo "Enabled SPI"
+echo
 
 echo "All done! If you have any suggestions or find any bugs, report them on github:"
 echo "https://github.com/Jonathan357611/Launch-Tracker/"
