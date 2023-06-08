@@ -1,5 +1,7 @@
 # Launch-Tracker
 
+You can read about it on my website [here](https://jonathan357611.github.io/project.html?p=launch_tracker)
+
 This is my new version of my old [SpaceX-Tracker](https://github.com/Jonathan357611/SpaceX-Launch-Tracker), which just showed SpaceX-Launches as the name implies. Reason is that the r/SpaceX-API has been discontinued.
 The new version uses the https://thespacedevs.com/ API. One advantage is, that the program is now able to receive all rocket launches.
 
